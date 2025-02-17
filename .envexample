@@ -1,0 +1,3 @@
+DATABASE_URL_POSTGRES=postgresql://postgres:deivid@localhost:5432/postgres
+DATABASE_URL_RICK_AND_MORTY=postgresql://postgres:deivid@localhost:5432/rick_and_morty
+DB_NAME=rick_and_morty
