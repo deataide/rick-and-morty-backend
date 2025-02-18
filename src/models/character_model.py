@@ -21,14 +21,14 @@ class Character(db.Model):
 class BaseCharacterOutput(ma.Schema):
     id = ma.Integer()
     name = ma.String()
-    status = ma.String()
-    species = ma.String()
     image = ma.String()
+    species = ma.String()
+
+class OneCharacterOutput(BaseCharacterOutput):
+    status = ma.String()
     gender = ma.String()
     origin = ma.Nested("LocationOutput")
     location = ma.Nested("LocationOutput")
-
-class ManyCharactersOutput(BaseCharacterOutput):
     episodes = ma.Nested("EpisodeOutput", many=True)
     @post_dump
     def last_episode(self, data, many, **kwargs):
@@ -45,5 +45,5 @@ class SearchCharacterByNameInput(ma.Schema):
 
 search_character_by_name = SearchCharacterByNameInput()
 search_character_by_id = SearchCharacterByIdInput()
-character_output = BaseCharacterOutput()
-characters_output = ManyCharactersOutput(many=True)
+character_output = OneCharacterOutput()
+characters_output = BaseCharacterOutput(many=True)
