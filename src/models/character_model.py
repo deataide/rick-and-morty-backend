@@ -36,14 +36,6 @@ class OneCharacterOutput(BaseCharacterOutput):
             data["last_episode"] = data["episodes"][-1]
             data.pop("episodes")
         return data
-
-class SearchCharacterByIdInput(ma.Schema):
-    id = ma.Integer(required=True)
-
-class SearchCharacterByNameInput(ma.Schema):
-    name = ma.String(required=True, validate=validate.Length(min=3, max=50))
-
-search_character_by_name = SearchCharacterByNameInput()
-search_character_by_id = SearchCharacterByIdInput()
+    
 character_output = OneCharacterOutput()
 characters_output = BaseCharacterOutput(many=True)

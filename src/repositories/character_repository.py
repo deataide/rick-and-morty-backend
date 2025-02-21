@@ -1,11 +1,10 @@
 from models.character_model import db, Character
-from sqlalchemy.exc import SQLAlchemyError
 import math
 
 class CharacterRepository:
     
     def get_character_by_id(self, character_id: int):
-        return Character.query.get(character_id)
+        return db.session.get(Character, character_id)
 
     def get_characters_by_name(self, name_starts_with: str, offset: int = 0):
 
@@ -20,6 +19,6 @@ class CharacterRepository:
                 "total_pages": total_pages
                 }
             
-        except SQLAlchemyError:
+        except Exception:
             db.session.rollback()
             raise

@@ -1,5 +1,7 @@
 from services.character_service import CharacterService
 from flask import jsonify, request
+from utils.api_response import ApiResponse
+from werkzeug.exceptions import NotFound
 
 class CharacterController: 
     
@@ -9,32 +11,21 @@ class CharacterController:
     def get_character_by_id(self, character_id):
         try:
             data = self.character_service.get_character_by_id(character_id)
-            if isinstance(data, tuple):
-                return jsonify(data[0]), data[1]
+            return ApiResponse.response(True, 'Character', data, 200)
+        
+        except NotFound as f:
+            return ApiResponse.response(False, 'Character not found', None, 404)
+        
+        except Exception as f:
+            return ApiResponse.response(False, f.args[0], None, 500)
 
-            return jsonify(data), 200
-            
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500 
-
-    def get_characters_by_name(self):
+    def get_characters_by_name(self, name_starts_with, page):
         try:
-            params = request.args.to_dict()
-            name_starts_with = params.get('nameStartsWith', 'rick')
-
-            try:
-                page = int(params.get('page', 1))
-                if page < 1:
-                    raise ValueError
-            except ValueError:
-                return jsonify({"message": "Page must be a positive integer"}), 400
-
             data = self.character_service.get_characters_by_name(name_starts_with, page)
+            return ApiResponse.response(True, 'Characters', data, 200)
+        
+        except NotFound as f:
+            return ApiResponse.response(False, 'Characters not found', None, 404)
 
-            if isinstance(data, tuple):
-                return jsonify(data[0]), data[1]
-
-            return jsonify(data), 200
-
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
+        except Exception as f:
+            return ApiResponse.response(False, f[0], None, 500)
