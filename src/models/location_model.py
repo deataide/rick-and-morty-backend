@@ -1,4 +1,4 @@
-from models import db, ma
+from src.models import db, ma
 
 class Location(db.Model):
     __tablename__ = 'locations'

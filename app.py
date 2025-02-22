@@ -4,10 +4,11 @@ from dotenv import load_dotenv
 import os
 from sqlalchemy_utils import database_exists, create_database, table_name
 from sqlalchemy import create_engine, text
-from models import db
+from src.models import db
 from flask_sqlalchemy import SQLAlchemy
-from routes.character_routes import characters_bp
+from src.routes.character_routes import characters_bp
 from sqlalchemy.exc import OperationalError
+from src.routes import cache
 
 load_dotenv()
 
@@ -27,7 +28,10 @@ with engine.connect() as conn:
         
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL_RICK_AND_MORTY
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+app.config['CACHE_TYPE'] = 'simple' 
+app.config['CACHE_DEFAULT_TIMEOUT'] = 120 
+ 
+cache.init_app(app)
 db.init_app(app)
 
 with app.app_context():

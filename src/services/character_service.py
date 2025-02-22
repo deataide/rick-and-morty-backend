@@ -1,5 +1,5 @@
-from repositories.character_repository import CharacterRepository
-from models.character_model import character_output, characters_output
+from src.repositories.character_repository import CharacterRepository
+from src.models.character_model import character_output, characters_output
 from werkzeug.exceptions import NotFound
 
 class CharacterService:
@@ -16,7 +16,7 @@ class CharacterService:
 
         return serialized_character
 
-    def get_characters_by_name(self, name_starts_with: str, page):
+    def get_characters_by_name(self, name_starts_with: str, page=1):
 
         offset = (page - 1) * 20
         characters_data = self.character_repository.get_characters_by_name(name_starts_with, offset)

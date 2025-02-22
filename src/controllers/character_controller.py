@@ -1,6 +1,6 @@
-from services.character_service import CharacterService
+from src.services.character_service import CharacterService
 from flask import jsonify, request
-from utils.api_response import ApiResponse
+from src.utils.api_response import ApiResponse
 from werkzeug.exceptions import NotFound
 
 class CharacterController: 

@@ -1,4 +1,4 @@
-from models.character_model import db, Character
+from src.models.character_model import db, Character
 import math
 
 class CharacterRepository:

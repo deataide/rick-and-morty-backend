@@ -1,4 +1,4 @@
-from models import db
+from src.models import db
 
 class Characters_Episodes(db.Model):
     __tablename__ = 'characters_episodes'

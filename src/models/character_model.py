@@ -1,4 +1,4 @@
-from models import ma, db
+from src.models import ma, db
 from marshmallow import validate, fields, post_dump
 
 class Character(db.Model):
