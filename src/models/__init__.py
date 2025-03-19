@@ -1,5 +1,4 @@
 from flask_sqlalchemy import SQLAlchemy
-from marshmallow import validate, fields
 from flask_marshmallow import Marshmallow
 
 ma = Marshmallow()

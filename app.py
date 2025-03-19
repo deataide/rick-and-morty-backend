@@ -1,14 +1,13 @@
 from flask import Flask
-from flask_caching import Cache
 from dotenv import load_dotenv
 import os
-from sqlalchemy_utils import database_exists, create_database, table_name
 from sqlalchemy import create_engine, text
 from src.models import db
 from flask_sqlalchemy import SQLAlchemy
 from src.routes.character_routes import characters_bp
 from sqlalchemy.exc import OperationalError
 from src.routes import cache
+from flask_cors import CORS
 
 load_dotenv()
 
@@ -31,6 +30,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CACHE_TYPE'] = 'simple' 
 app.config['CACHE_DEFAULT_TIMEOUT'] = 120 
 
+cors = CORS(app)
 cache.init_app(app)
 db.init_app(app)
 

@@ -1,5 +1,5 @@
 from src.models import ma, db
-from marshmallow import validate, fields, post_dump
+from marshmallow import post_dump
 
 class Character(db.Model):
     __tablename__ = 'characters'
@@ -22,10 +22,10 @@ class BaseCharacterOutput(ma.Schema):
     id = ma.Integer()
     name = ma.String()
     image = ma.String()
+    status = ma.String()
     species = ma.String()
 
 class OneCharacterOutput(BaseCharacterOutput):
-    status = ma.String()
     gender = ma.String()
     origin = ma.Nested("LocationOutput")
     location = ma.Nested("LocationOutput")
