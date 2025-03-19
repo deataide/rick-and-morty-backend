@@ -1,5 +1,4 @@
 from src.services.character_service import CharacterService
-from flask import jsonify, request
 from src.utils.api_response import ApiResponse
 from werkzeug.exceptions import NotFound
 

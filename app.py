@@ -30,7 +30,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL_RICK_AND_MORTY
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CACHE_TYPE'] = 'simple' 
 app.config['CACHE_DEFAULT_TIMEOUT'] = 120 
- 
+
 cache.init_app(app)
 db.init_app(app)
 
