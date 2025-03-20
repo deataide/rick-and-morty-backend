@@ -22,9 +22,6 @@ class CharacterController:
         try:
             data = self.character_service.get_characters_by_name(name_starts_with, page)
             return ApiResponse.response(True, 'Characters', data, 200)
-        
-        except NotFound as f:
-            return ApiResponse.response(False, 'Characters not found', None, 404)
 
         except Exception as f:
             return ApiResponse.response(False, f[0], None, 500)

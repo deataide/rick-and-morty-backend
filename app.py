@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 import os
 from sqlalchemy import create_engine, text
 from src.models import db
-from flask_sqlalchemy import SQLAlchemy
 from src.routes.character_routes import characters_bp
 from sqlalchemy.exc import OperationalError
 from src.routes import cache

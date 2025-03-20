@@ -20,8 +20,6 @@ class CharacterService:
 
         offset = (page - 1) * 20
         characters_data = self.character_repository.get_characters_by_name(name_starts_with, offset)
-        if not characters_data:
-            raise NotFound("Characters not found") 
     
         serialized_characters = characters_output.dump(characters_data["characters"])
 
