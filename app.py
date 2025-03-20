@@ -7,6 +7,7 @@ from src.routes.character_routes import characters_bp
 from sqlalchemy.exc import OperationalError
 from src.routes import cache
 from flask_cors import CORS
+from src.utils.constants import ENVIRONMENTS
 
 load_dotenv()
 
@@ -29,9 +30,20 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CACHE_TYPE'] = 'simple' 
 app.config['CACHE_DEFAULT_TIMEOUT'] = 120 
 
-cors = CORS(app)
 cache.init_app(app)
 db.init_app(app)
+
+front_end_url = os.getenv("FRONT_END_URL")
+environment = os.getenv("ENVIRONMENT")
+
+origins_map = {
+    ENVIRONMENTS.LOCAL.value: ["*"],
+    ENVIRONMENTS.PRODUCTION.value: [front_end_url],
+}
+
+allowed_origin = origins_map.get(environment, origins_map[ENVIRONMENTS.PRODUCTION.value])
+
+CORS(app, origins = allowed_origin)
 
 with app.app_context():
     try:
